@@ -38,28 +38,66 @@ export const useAuthentication = () => {
                 displayName: data.displayName
             });
 
+            setLoading(false);
+
             return user;
-        } catch(error) {
+        } 
+        catch (error) {
             console.log(error.message);
             console.log(typeof error.message);
+      
+            let systemErrorMessage;
+      
+            if (error.message.includes("Password")) {
+              systemErrorMessage = "A senha precisa conter pelo menos 6 caracteres.";
+            } else if (error.message.includes("email-already")) {
+              systemErrorMessage = "E-mail já cadastrado.";
+            } else {
+              systemErrorMessage = "Ocorreu um erro, por favor tenta mais tarde.";
+            }
+      
+            setLoading(false);
+            setError(systemErrorMessage);
+        }
+      
+    };
 
+    //logout - sign out
+    const logout = () => {
+        checkIfIsCancelled();
+
+        signOut(auth)
+    }
+      
+    //Login sign in
+    const login = async(data) => {
+        checkIfIsCancelled();
+        setLoading(true);
+        setError(false);
+
+        try {
+            await signInWithEmailAndPassword(auth, data.email, data.password);
+            setLoading(false);
+        } 
+        catch (error) {
+            console.log(error.message);
+            console.log(typeof error.message);
+      
             let systemErrorMessage;
 
-            if (error.message.includes("Password")) {
-                systemErrorMessage = "A senha precisa conter pelo menos 6 caracteres.";
-            } 
-            else if(error.message.includes("email-already")) {
-                systemErrorMessage = "E-mail já cadastrado.";
-            } 
+            if (error.message.includes("user-not-found")) {
+                systemErrorMessage = "Usuário não encontrado!";
+            }
+            else if (error.message.includes("invalid-credential")) {
+                systemErrorMessage = "Credenciais inválidas.";
+            }
             else {
-                systemErrorMessage = "Ocorreu um erro, por favor tente mais tarde.";
+                systemErrorMessage = "Ocorreu um erro, por favor tente mais tarde."
             }
 
-            setError(systemErrorMessage);
-
+            setLoading(false);
+            setError(systemErrorMessage)
         }
-
-        setLoading(false);
     }
 
     useEffect(() => {
@@ -71,5 +109,7 @@ export const useAuthentication = () => {
         createUser,
         error,
         loading, 
+        logout,
+        login,
     };
 }
