@@ -1,6 +1,5 @@
-import { db } from "../firebase/config";
+import { db, auth } from "../firebase/config";
 import {
-    getAuth,
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     updateProfile,
@@ -13,8 +12,6 @@ export const useAuthentication = () => {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(null);
     const [cancelled, setCancelled] = useState(false);
-
-    const auth = getAuth();
 
     function checkIfIsCancelled () {
         if (cancelled) {
