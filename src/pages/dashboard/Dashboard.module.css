@@ -49,11 +49,25 @@
   .post_row p {
     color: #000;
   }
-  
-  .post_row button,
+
   .post_row a {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 0.7em;
+    height: 10px;
+    width: 80px;
+    align-content: center;
+    justify-content: center;
+    margin: 5px 5px;
+    border-radius: 0px;
+  }
+  
+  .post_row button {
     margin: 0 5px;
     height: 30px;
-    width: 100px;
+    width: 110px;
     font-size: 0.7em;
+    border-radius: 0px;
   }
+
+ 
