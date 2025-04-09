@@ -47,7 +47,7 @@ const Dashboard = () => {
                   <Link to={`/posts/${post.id}`} className="btn btn-visualize">
                     Ver
                   </Link>
-                  <Link to={`/posts/${post.id}`} className="btn btn-edit">
+                  <Link to={`/posts/edit/${post.id}`} className="btn btn-edit">
                     Editar
                   </Link>
                   <button

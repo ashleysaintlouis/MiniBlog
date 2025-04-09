@@ -45,6 +45,12 @@ const CreatePost = () => {
       createdBy: user.displayName,
     });
 
+    setTitle("");
+    setImage("");
+    setBody("");
+    setTags("");
+
+    alert("Post criado com sucesso");
     // redirect to home page
   };
 
@@ -63,6 +69,7 @@ const CreatePost = () => {
             onChange={(e) => setTitle(e.target.value)}
             value={title}
           />
+          <p>Teste: {title}</p>
         </label>
         <label>
           <span>URL da imagem:</span>
